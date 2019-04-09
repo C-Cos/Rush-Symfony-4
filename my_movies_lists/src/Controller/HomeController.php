@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 class HomeController
 {
@@ -10,8 +11,8 @@ class HomeController
      * @var Environment
      */
     private $twig;
-    
-    public function __construct($twig){
+
+    public function __construct(Environment $twig){
         $this->twig = $twig;
     }
 
