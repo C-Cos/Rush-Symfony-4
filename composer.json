@@ -1,5 +1,6 @@
 {
     "require": {
-        "aharen/omdbapi": "^2.0"
+        "aharen/omdbapi": "^2.0",
+        "symfony/http-foundation": "^4.2"
     }
 }
