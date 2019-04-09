@@ -1,0 +1,32 @@
+{
+    "name": "php-tmdb/symfony",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Symfony Bundle for TMDB (The Movie Database) API. Provides easy access to the php-tmdb/api library.",
+    "homepage": "https://github.com/wtfzdotnet/php-tmdb-api",
+    "keywords": ["tmdb", "api", "php","wrapper", "movie", "cinema", "tv", "tv show", "tvdb", "symfony", "symfony2", "symfony3"],
+    "authors": [
+        {
+            "name": "Michael Roterman",
+            "homepage": "http://wtfz.net",
+            "email": "michael@wtfz.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "symfony/config": ">=2.7,<5",
+        "symfony/dependency-injection": ">=2.7,<5",
+        "symfony/event-dispatcher": ">=2.7,<5",
+        "symfony/http-kernel": ">=2.7,<5",
+        "doctrine/doctrine-cache-bundle": "^1.0",
+        "php-tmdb/api": "^2.1",
+        "twig/twig": "^1.11|^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8||^5.0,<5.4",
+        "symfony/framework-bundle": ">=2.7,<5"
+    },
+    "autoload": {
+        "psr-4": { "Tmdb\\SymfonyBundle\\": "" }
+    }
+}
