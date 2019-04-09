@@ -7,18 +7,14 @@ use Twig\Environment;
 
 class HomeController
 {
-    /**
-     * @var Environment
-     */
-    private $twig;
-
-    public function __construct(Environment $twig){
-        $this->twig = $twig;
-    }
 
     public function index():Response
     {
-        return new Response($this->twig->render('Pages/Home.html.twig'));
+        $token  = new \Tmdb\ApiToken('2d0f20ce4b63a3992d225fe3751cb1d1');
+        $client = new \Tmdb\Client($token);
+        $movie = $client->getMoviesApi()->getMovie(550);
+        return new Response(var_dump($movie));
+        //return new Response($this->twig->render('Pages/Home.html.twig'));
     }
 
 }
