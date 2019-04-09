@@ -1,8 +1,0 @@
-{
-    "require": {
-        "aharen/omdbapi": "^2.0",
-        "symfony/http-foundation": "^4.2",
-        "symfony/apache-pack": "^1.0",
-        "php-tmdb/symfony": "^2.2"
-    }
-}
