@@ -48,7 +48,7 @@ class Users implements UserInterface
     private $create_date;
 
     /**
-     * @ORM\Column(type="datetime")
+ * @ORM\Column(type="datetime", nullable=true)
      */
     private $modify_date;
 
