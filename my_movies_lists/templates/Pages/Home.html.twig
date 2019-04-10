@@ -4,9 +4,28 @@
 <div class="jumbotron text-center">
     <h1>Bienvenue sur la Chmod List</h1>
     <p>Lorem Ipsum</p>
+</div>
 
-<div class="container">
+
+  
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
 </div>
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="container">
+            {% for movie in movies.results %}
+            <div class="card" style="width: 18rem;">
+                <img src="http://image.tmdb.org/t/p/w342{{ movie.poster_path }}" class="card-img-top responsive rounded mx-auto d-block" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
+
 {% endblock %}
 
