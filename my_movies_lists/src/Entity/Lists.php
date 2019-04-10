@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ListsRepository")
@@ -99,9 +100,9 @@ class Lists
         return $this->create_date;
     }
 
-    public function setCreateDate(\DateTimeInterface $create_date): self
+    public function setCreateDate(): self
     {
-        $this->create_date = $create_date;
+        $this->create_date = new DateTime();
 
         return $this;
     }
@@ -111,9 +112,9 @@ class Lists
         return $this->edit_date;
     }
 
-    public function setEditDate(?\DateTimeInterface $edit_date): self
+    public function setEditDate(): self
     {
-        $this->edit_date = $edit_date;
+        $this->edit_date = new DateTime();
 
         return $this;
     }

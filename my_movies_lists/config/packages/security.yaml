@@ -24,6 +24,9 @@ security:
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\AppChmodlistLoginAuthenticator
 
             # activate different ways to authenticate
 
