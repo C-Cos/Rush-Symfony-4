@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Users
+class Users implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -17,50 +22,54 @@ class Users
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
+    private $create_date;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_date;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $modified_date;
+    private $modify_date;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $profile_description;
+    private $profile_desc;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lists", mappedBy="user")
+     */
+    private $lists;
+
+    public function __construct()
+    {
+        $this->lists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -75,9 +84,41 @@ class Users
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->password;
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -87,38 +128,93 @@ class Users
         return $this;
     }
 
-    public function getCreatedDate(): ?\DateTimeInterface
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
     {
-        return $this->created_date;
+        // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
-    public function setCreatedDate(\DateTimeInterface $created_date): self
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        $this->created_date = $created_date;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
 
-    public function getModifiedDate(): ?\DateTimeInterface
+    public function getCreateDate(): ?\DateTimeInterface
     {
-        return $this->modified_date;
+        return $this->create_date;
     }
 
-    public function setModifiedDate(?\DateTimeInterface $modified_date): self
+    public function setCreateDate(\DateTimeInterface $create_date): self
     {
-        $this->modified_date = $modified_date;
+        $this->create_date = $create_date;
 
         return $this;
     }
 
-    public function getProfileDescription(): ?string
+    public function getModifyDate(): ?\DateTimeInterface
     {
-        return $this->profile_description;
+        return $this->modify_date;
     }
 
-    public function setProfileDescription(?string $profile_description): self
+    public function setModifyDate(\DateTimeInterface $modify_date): self
     {
-        $this->profile_description = $profile_description;
+        $this->modify_date = $modify_date;
+
+        return $this;
+    }
+
+    public function getProfileDesc(): ?string
+    {
+        return $this->profile_desc;
+    }
+
+    public function setProfileDesc(?string $profile_desc): self
+    {
+        $this->profile_desc = $profile_desc;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lists[]
+     */
+    public function getLists(): Collection
+    {
+        return $this->lists;
+    }
+
+    public function addList(Lists $list): self
+    {
+        if (!$this->lists->contains($list)) {
+            $this->lists[] = $list;
+            $list->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeList(Lists $list): self
+    {
+        if ($this->lists->contains($list)) {
+            $this->lists->removeElement($list);
+            // set the owning side to null (unless already changed)
+            if ($list->getUser() === $this) {
+                $list->setUser(null);
+            }
+        }
 
         return $this;
     }

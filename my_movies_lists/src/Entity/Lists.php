@@ -17,29 +17,25 @@ class Lists
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\users", inversedBy="lists")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $user_id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $movie_id;
+    private $user;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $list_name;
+    private $listname;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $list_description;
+    private $description;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_date;
+    private $create_date;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -51,67 +47,61 @@ class Lists
      */
     private $privacy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Movie", inversedBy="title")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $movie;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?int
+    public function getUser(): ?users
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(int $user_id): self
+    public function setUser(?users $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getMovieId(): ?int
+    public function getListname(): ?string
     {
-        return $this->movie_id;
+        return $this->listname;
     }
 
-    public function setMovieId(int $movie_id): self
+    public function setListname(string $listname): self
     {
-        $this->movie_id = $movie_id;
+        $this->listname = $listname;
 
         return $this;
     }
 
-    public function getListName(): ?string
+    public function getDescription(): ?string
     {
-        return $this->list_name;
+        return $this->description;
     }
 
-    public function setListName(string $list_name): self
+    public function setDescription(?string $description): self
     {
-        $this->list_name = $list_name;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function getListDescription(): ?string
+    public function getCreateDate(): ?\DateTimeInterface
     {
-        return $this->list_description;
+        return $this->create_date;
     }
 
-    public function setListDescription(?string $list_description): self
+    public function setCreateDate(\DateTimeInterface $create_date): self
     {
-        $this->list_description = $list_description;
-
-        return $this;
-    }
-
-    public function getCreatedDate(): ?\DateTimeInterface
-    {
-        return $this->created_date;
-    }
-
-    public function setCreatedDate(\DateTimeInterface $created_date): self
-    {
-        $this->created_date = $created_date;
+        $this->create_date = $create_date;
 
         return $this;
     }
@@ -136,6 +126,18 @@ class Lists
     public function setPrivacy(bool $privacy): self
     {
         $this->privacy = $privacy;
+
+        return $this;
+    }
+
+    public function getMovie(): ?Movie
+    {
+        return $this->movie;
+    }
+
+    public function setMovie(?Movie $movie): self
+    {
+        $this->movie = $movie;
 
         return $this;
     }
