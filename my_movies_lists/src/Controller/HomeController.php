@@ -12,8 +12,9 @@ class HomeController
     {
         $token  = new \Tmdb\ApiToken('2d0f20ce4b63a3992d225fe3751cb1d1');
         $client = new \Tmdb\Client($token);
-        $movie = $client->getMoviesApi()->getMovie(550);
-        return new Response(var_dump($movie));
+        $repository = new \Tmdb\Repository\MovieRepository($client);
+        $movie      = $repository->load(552);
+        return new Response($movie->getTitle());
         //return new Response($this->twig->render('Pages/Home.html.twig'));
     }
 
