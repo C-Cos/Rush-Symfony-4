@@ -31,8 +31,6 @@ class HomeController
         dump($movies);
         //return new Response($this->twig->render('Pages/Home.html.twig'));
         return new Response($this->twig->render('Pages/Home.html.twig', array('movies' => $movies)));
-        
-    
 
     }
 }

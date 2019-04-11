@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+<h1 class="container-fluid text-center h-50 p-3">{{ movies.original_title }}</h1>
+
+<div class="container">
+    <div class = 'row'>
+            <div class = 'col-lg-3'>
+            <img src="http://image.tmdb.org/t/p/w300{{ movies.poster_path }}">
+            </div>
+            <div class = 'col-lg-1'>
+            </div>
+            <div class = 'col-lg-6'>
+                    <p><strong>Original Title : </strong>{{ movies.original_title }}</p>
+                    <p class="lead"><strong>Synopsis : </strong>{{ movies.overview }}</p>
+                    <p><strong>Original Language : </strong>{{ movies.original_language }}</p>
+                    <p><strong>Release Date : </strong>{{ movies.release_date }}</p>
+                    <p><strong>Total Duration : </strong>{{ movies.runtime }}</p>
+                    <p><strong>Average Vote : </strong>{{ movies.vote_average }}</p>
+                    <button type="button" class="btn btn-info">Add To List</button>
+            </div>
+            
+            {# <button type="button" class="btn btn-info">Info</button> #}
+            
+    </div>
+</div>
+
+{% endblock %}

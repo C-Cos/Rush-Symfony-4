@@ -1,9 +1,9 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="jumbotron text-center">
-    <h1>Bienvenue sur la Chmod List</h1>
-    <p>Lorem Ipsum</p>
+<div class="container-fluid text-center h-25 bg-light text-dark p-3 mb-2">
+    <h1>Welcome to the Chmod List</h1>
+    <p>Browse your favorite movies !</p>
 </div>
 
 <div class = 'container center'>
@@ -14,8 +14,8 @@
                     <img src="http://image.tmdb.org/t/p/w300{{ movie.poster_path }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ movie.title }}</h5>
-                            <p class="card-text">{{ movie.overview|slice(0,70) }}...</p>
-                            <a href="#" class="btn btn-primary">Voir Film</a>
+                            {# <p class="card-text">{{ movie.overview|slice(0,70) }}...</p> #}
+                            <a href="{{ path('movie', {'id': movie.id}) }}" class="btn btn-primary">See Movie</a>
                         </div>
                 </div>
             </div>
