@@ -20,7 +20,7 @@
                     <p><strong>Release Date : </strong>{{ movies.release_date }}</p>
                     <p><strong>Total Duration : </strong>{{ movies.runtime }}</p>
                     <p><strong>Average Vote : </strong>{{ movies.vote_average }}</p>
-                    <button type="button" class="btn btn-info">Add To List</button>
+                    <a href="{{ path('movie_new', {'title': movies.original_title}) }}" class="btn btn-primary">Add To List</a>
             </div>
             
             {# <button type="button" class="btn btn-info">Info</button> #}
