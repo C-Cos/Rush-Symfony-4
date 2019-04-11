@@ -66,6 +66,8 @@ class Users implements UserInterface
     {
         $this->lists = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
+        $this->create_date = new \DateTime();
+        $this->modify_date = new \DateTime();
     }
 
     public function getId(): ?int

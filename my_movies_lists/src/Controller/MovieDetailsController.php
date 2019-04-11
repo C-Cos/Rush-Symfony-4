@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class MovieDetailsController extends AbstractController
 {
     /**
-     * @Route("/movie/details{id}", defaults={"id" = 0}, name="movie_details")
+     * @Route("/movies/details{id}", defaults={"id" = 0}, name="movies_details")
      * @Method("GET")
      */
     public function index($id)

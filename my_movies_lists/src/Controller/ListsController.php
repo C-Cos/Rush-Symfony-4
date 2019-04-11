@@ -33,6 +33,8 @@ class ListsController extends AbstractController
         $list = new Lists();
         $form = $this->createForm(ListsType::class, $list);
         $form->handleRequest($request);
+        $list->setUser($this->getUser());
+        //dump($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

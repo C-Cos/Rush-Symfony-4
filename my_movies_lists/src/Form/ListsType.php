@@ -17,8 +17,8 @@ class ListsType extends AbstractType
             //->add('create_date')
             //->add('edit_date')
             ->add('privacy')
-            ->add('user')
-            ->add('movie')
+            //->add('user')
+            //->add('movie')
         ;
     }
 
