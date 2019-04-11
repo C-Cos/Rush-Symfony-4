@@ -53,12 +53,15 @@ class Lists
      */
     private $movie;
 
-    public function __construct()
-    {
-        /* $this->create_date = new \DateTime();
-        $this->edit_date = new \DateTime(); */
-        
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="Listname")
+     */
+    private $userlist;
+
+    //public function __construct()
+    //{
+        //$this->create_date = new \DateTime();
+    //}
 
     public function getId(): ?int
     {
@@ -145,6 +148,18 @@ class Lists
     public function setMovie(?Movie $movie): self
     {
         $this->movie = $movie;
+
+        return $this;
+    }
+
+    public function getUserlist(): ?Users
+    {
+        return $this->userlist;
+    }
+
+    public function setUserlist(?Users $userlist): self
+    {
+        $this->userlist = $userlist;
 
         return $this;
     }

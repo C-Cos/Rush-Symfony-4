@@ -62,12 +62,16 @@ class Users implements UserInterface
      */
     private $lists;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lists", mappedBy="userlist")
+     */
+    private $Listname;
+
     public function __construct()
     {
         $this->lists = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
-        $this->create_date = new \DateTime();
-        $this->modify_date = new \DateTime();
+        $this->Listname = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,6 +221,37 @@ class Users implements UserInterface
             // set the owning side to null (unless already changed)
             if ($list->getUser() === $this) {
                 $list->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lists[]
+     */
+    public function getListname(): Collection
+    {
+        return $this->Listname;
+    }
+
+    public function addListname(Lists $listname): self
+    {
+        if (!$this->Listname->contains($listname)) {
+            $this->Listname[] = $listname;
+            $listname->setUserlist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListname(Lists $listname): self
+    {
+        if ($this->Listname->contains($listname)) {
+            $this->Listname->removeElement($listname);
+            // set the owning side to null (unless already changed)
+            if ($listname->getUserlist() === $this) {
+                $listname->setUserlist(null);
             }
         }
 

@@ -19,7 +19,7 @@ class Movie
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\lists", mappedBy="movie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Lists", mappedBy="movie")
      */
     private $title;
 
