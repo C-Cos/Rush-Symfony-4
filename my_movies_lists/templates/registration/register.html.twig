@@ -10,10 +10,10 @@
     <h1 class="font-weight-normal text-center">Register</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.profile_desc) }}
+        {{ form_row(registrationForm.username, { 'attr': {'class': 'form-control', 'placeholder': 'Username'|trans }} ) }}
+        {{ form_row(registrationForm.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'|trans }}) }}
+        {{ form_row(registrationForm.plainPassword, { 'attr': {'class': 'form-control', 'placeholder': 'Password'|trans }}) }}
+        {{ form_row(registrationForm.profile_desc, { 'attr': {'class': 'form-control', 'placeholder': 'Description'|trans }}) }}
 
         <button id="sign" class="btn btn-lg btn-primary" type="submit">
             Register
@@ -21,30 +21,3 @@
     {{ form_end(registrationForm) }}
 </div>
 {% endblock %}
-{# <?php
-
-namespace App\Controller;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
-class MovieController extends AbstractController
-{
-    /**
-     * @Route("/movie/{id}", defaults={"id" = 0}, name="movie")
-     * @Method("GET")
-     */
-    public function index($id)
-    {
-        $token  = new \Tmdb\ApiToken('2d0f20ce4b63a3992d225fe3751cb1d1');
-        $client = new \Tmdb\Client($token);
-
-        $movie = $client->getMoviesApi()->getMovie($id);
-
-        dump($movie);
-
-        return $this->render('movie/index.html.twig', array('movies' => $movie));
-            
-    }
-} #}
