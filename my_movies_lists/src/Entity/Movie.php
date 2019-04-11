@@ -23,6 +23,11 @@ class Movie
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title_name;
+
     public function __construct()
     {
         $this->title = new ArrayCollection();
@@ -60,6 +65,18 @@ class Movie
                 $title->setMovie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTitleName(): ?string
+    {
+        return $this->title_name;
+    }
+
+    public function setTitleName(string $title_name): self
+    {
+        $this->title_name = $title_name;
 
         return $this;
     }

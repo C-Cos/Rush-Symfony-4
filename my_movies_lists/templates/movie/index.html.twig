@@ -1,31 +1,35 @@
 {% extends 'base.html.twig' %}
 
-
+{% block title %}Movie index{% endblock %}
 
 {% block body %}
+    <h1>Movie index</h1>
 
-<h1 class="container-fluid text-center h-50 p-3">{{ movies.original_title }}</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title_name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for movie in movies %}
+            <tr>
+                <td>{{ movie.id }}</td>
+                <td>{{ movie.titleName }}</td>
+                <td>
+                    <a href="{{ path('movie_show', {'id': movie.id}) }}">show</a>
+                    <a href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-<div class="container">
-    <div class = 'row'>
-            <div class = 'col-lg-3'>
-            <img src="http://image.tmdb.org/t/p/w300{{ movies.poster_path }}">
-            </div>
-            <div class = 'col-lg-1'>
-            </div>
-            <div class = 'col-lg-6'>
-                    <p><strong>Original Title : </strong>{{ movies.original_title }}</p>
-                    <p class="lead"><strong>Synopsis : </strong>{{ movies.overview }}</p>
-                    <p><strong>Original Language : </strong>{{ movies.original_language }}</p>
-                    <p><strong>Release Date : </strong>{{ movies.release_date }}</p>
-                    <p><strong>Total Duration : </strong>{{ movies.runtime }}</p>
-                    <p><strong>Average Vote : </strong>{{ movies.vote_average }}</p>
-                    <button type="button" class="btn btn-info">Add To List</button>
-            </div>
-            
-            {# <button type="button" class="btn btn-info">Info</button> #}
-            
-    </div>
-</div>
-
+    <a href="{{ path('movie_new') }}">Create new</a>
 {% endblock %}

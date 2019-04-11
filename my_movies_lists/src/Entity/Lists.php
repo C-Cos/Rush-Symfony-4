@@ -53,6 +53,11 @@ class Lists
      */
     private $movie;
 
+    //public function __construct()
+    //{
+        //$this->create_date = new \DateTime();
+    //}
+
     public function getId(): ?int
     {
         return $this->id;

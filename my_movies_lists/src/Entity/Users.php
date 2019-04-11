@@ -65,6 +65,7 @@ class Users implements UserInterface
     public function __construct()
     {
         $this->lists = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
     }
 
     public function getId(): ?int
@@ -156,6 +157,7 @@ class Users implements UserInterface
     {
         return $this->create_date;
     }
+
 
     public function setCreateDate(\DateTimeInterface $create_date): self
     {

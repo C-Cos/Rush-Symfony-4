@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * @Route("/users")
@@ -30,12 +31,16 @@ class UsersController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $user = new Users();
+        $user = new Users();        
         $form = $this->createForm(UsersType::class, $user);
+
+        //$form->remove('roles');
+        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setModifyDate(new \DateTime());
+            $user->setCreateDate(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -66,6 +71,8 @@ class UsersController extends AbstractController
     {
         $form = $this->createForm(UsersType::class, $user);
         $form->handleRequest($request);
+        //$form->remove('roles');
+        //$form->add('roles', ChoiceType::class, ['choices' => ['member' => 'member']]);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
