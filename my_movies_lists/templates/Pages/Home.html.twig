@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ movie.title }}</h5>
                             {# <p class="card-text">{{ movie.overview|slice(0,70) }}...</p> #}
-                            <a href="{{ path('movie', {'id': movie.id}) }}" class="btn btn-primary">See Movie</a>
+                            <a href="{{ path('movie_details', {'id': movie.id}) }}" class="btn btn-primary">See Movie</a>
                         </div>
                 </div>
             </div>

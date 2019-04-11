@@ -6,10 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class MovieController extends AbstractController
+class MovieDetailsController extends AbstractController
 {
     /**
-     * @Route("/movie/{id}", defaults={"id" = 0}, name="movie")
+     * @Route("/movie/details{id}", defaults={"id" = 0}, name="movie_details")
      * @Method("GET")
      */
     public function index($id)
@@ -21,7 +21,8 @@ class MovieController extends AbstractController
 
         dump($movie);
 
-        return $this->render('movie/index.html.twig', array('movies' => $movie));
+        return $this->render('movie_details/index.html.twig', array('movies' => $movie));
             
     }
 }
+

@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="login.style.css">
+        <link rel="stylesheet" href="style.css">
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class='container text-center'>
+    <h1 class="font-weight-normal text-center">Register</h1>
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.username) }}
@@ -11,6 +15,36 @@
         {{ form_row(registrationForm.plainPassword) }}
         {{ form_row(registrationForm.profile_desc) }}
 
-        <button class="btn">Register</button>
+        <button id="sign" class="btn btn-lg btn-primary" type="submit">
+            Register
+        </button>
     {{ form_end(registrationForm) }}
+</div>
 {% endblock %}
+{# <?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
+class MovieController extends AbstractController
+{
+    /**
+     * @Route("/movie/{id}", defaults={"id" = 0}, name="movie")
+     * @Method("GET")
+     */
+    public function index($id)
+    {
+        $token  = new \Tmdb\ApiToken('2d0f20ce4b63a3992d225fe3751cb1d1');
+        $client = new \Tmdb\Client($token);
+
+        $movie = $client->getMoviesApi()->getMovie($id);
+
+        dump($movie);
+
+        return $this->render('movie/index.html.twig', array('movies' => $movie));
+            
+    }
+} #}

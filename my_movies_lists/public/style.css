@@ -4,5 +4,9 @@
 }
 
 footer{
-    font-size: 4px;
+    font-size: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
