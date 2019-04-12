@@ -24,7 +24,9 @@ class SearchController extends AbstractController
 
         dump($actor);
 
-        return $this->render('search/index.html.twig', ['movies' => $result, 'result' => $search, 'actors' => $actor['results']]);
-         
+        return $this->render('search/index.html.twig', ['movies' => $result, 'result' => $search, 'actors' => $actor]);
+        
     }
+
+    
 }

@@ -27,40 +27,20 @@ class MovieController extends AbstractController
     }
 
     /**
-     * @Route("/new{title}", name="movie_new", defaults = {"title" = 0})
-     * @Method("GET")
+     * @Route("/new", name="movie_new", methods={"GET","POST"})
+     * 
      */
-    public function new($title): Response
+    public function new(Request $request ): Response
     {
-        dump($title);
         $movie = new Movie();
-        $movie->setTitleName($title);
-        /* $form = $this->createForm(MovieType::class, $movie);
-        $form->handleRequest($request); */
+        $title = $request->request->get('title');
 
+        $movie->setTitleName($title);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($movie);
         $entityManager->flush();
-
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'Movie added to your list!'
-        );
-
-        return $this->redirectToRoute("home");
-
-        /* if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($movie);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('movie_index');
-        }
-
-        return $this->render('movie/new.html.twig', [
-            'movie' => $movie,
-            'form' => $form->createView(),
-        ]); */
+        
+        return new Response();
     }
 
     /**

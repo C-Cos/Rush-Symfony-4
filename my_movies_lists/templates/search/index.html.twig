@@ -22,10 +22,10 @@
         <h1>Results for '{{ result }}' in Actor</h1>
 
         <div class = 'row'>
-            {% for actor in actors.results[0] %}
+            {% for actor in actors.results %}
                 <div class = 'col-lg-3'>
                     <div class="card" style="width: 18rem;">
-                        <a href="{{ path('movies_details', {'id': actor.id}) }}"><img src="http://image.tmdb.org/t/p/w300{{ actor.profile_path }}" class="card-img-top" alt="..."></a>
+                        <a href="{{ path('actor_details', {'id': actor.id}) }}"><img src="http://image.tmdb.org/t/p/w300{{ actor.profile_path }}" class="card-img-top" alt="..."></a>
                     </div>
                 </div>
             {% endfor %}

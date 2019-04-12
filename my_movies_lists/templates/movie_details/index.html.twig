@@ -20,10 +20,31 @@
                     <p><strong>Release Date : </strong>{{ movies.release_date }}</p>
                     <p><strong>Total Duration : </strong>{{ movies.runtime }}</p>
                     <p><strong>Average Vote : </strong>{{ movies.vote_average }}</p>
-                    <a href="{{ path('movie_new', {'title': movies.original_title}, {'id': movies.id}) }}" class="btn btn-primary">Add To List</a>
+                    
+                        <button id="add_list" class="btn btn-info">Add To List</button>
+                
             </div>
             
-            {# <button type="button" class="btn btn-info">Info</button> #}
+        {% block javascripts %}
+        <script>
+        window.addEventListener('load', () => {
+                $("#add_list").click(function(){
+                        $.ajax({
+                                url: "{{ path('movie_new') }}",
+                                type: "POST",
+                                data: { title : "{{ movies.original_title }}" },
+                                success: function(e) {
+                                        console.log(e);
+                                        alert("Film Added to your List");
+                                },
+                                error(e) {
+                                        console.log(e);
+                                }
+                        });   
+                })
+        });
+        </script>
+        {% endblock %}
             
     </div>
 </div>
