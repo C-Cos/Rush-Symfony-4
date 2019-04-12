@@ -31,13 +31,13 @@ class ListsController extends AbstractController
     public function new(Request $request): Response
     {
         $list = new Lists();
+        $list->setUser($this->getUser());
+        $list->setEditDate(new \DateTime());
+        $list->setCreateDate(new \DateTime());
+        $list->setMovie($movie->getTitle());
         $form = $this->createForm(ListsType::class, $list);
         $form->handleRequest($request);
-        $list->setUser($this->getUser());
-        //$list->setEditDate(new \DateTime());
-        //$list->setMovie();
-        //dump($this->getUser());
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($list);

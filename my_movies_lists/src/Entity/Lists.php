@@ -38,7 +38,7 @@ class Lists
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Movie", inversedBy="title")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $movie;
 
@@ -76,12 +76,12 @@ class Lists
 
     public function getListname(): ?string
     {
-        return $this->listname;
+        return $this->list_name;
     }
 
     public function setListname(string $listname): self
     {
-        $this->listname = $listname;
+        $this->list_name = $listname;
 
         return $this;
     }

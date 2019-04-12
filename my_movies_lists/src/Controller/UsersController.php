@@ -33,6 +33,7 @@ class UsersController extends AbstractController
     {
         $user = new Users();        
         $form = $this->createForm(UsersType::class, $user);
+        
 
         //$form->remove('roles');
         
@@ -45,7 +46,18 @@ class UsersController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('users_index');
+            $list = new Lists();
+            $list->setUser($this->getUser());
+            $list->setListname('Favoris');
+            $list->setDescription("");
+            $list->setCreateDate(new \DateTime());
+            $list->setEditDate(new \DateTime());
+            $list->setMovie(" a ");
+            $list->setUserlist();
+
+
+
+            return $this->redirectToRoute('users_index'); 
         }
 
         return $this->render('users/new.html.twig', [
