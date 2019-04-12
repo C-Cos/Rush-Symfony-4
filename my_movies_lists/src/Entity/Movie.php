@@ -18,55 +18,45 @@ class Movie
      */
     private $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Lists", mappedBy="movie")
-     */
-    private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $title_name;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $create_date;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $edit_date;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Listname;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $privacy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="author")
+     */
+    private $users;
+
     public function __construct()
     {
-        $this->title = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|lists[]
-     */
-    public function getTitle(): Collection
-    {
-        return $this->title;
-    }
-
-    public function addTitle(lists $title): self
-    {
-        if (!$this->title->contains($title)) {
-            $this->title[] = $title;
-            $title->setMovie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTitle(lists $title): self
-    {
-        if ($this->title->contains($title)) {
-            $this->title->removeElement($title);
-            // set the owning side to null (unless already changed)
-            if ($title->getMovie() === $this) {
-                $title->setMovie(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getTitleName(): ?string
@@ -77,6 +67,66 @@ class Movie
     public function setTitleName(string $title_name): self
     {
         $this->title_name = $title_name;
+
+        return $this;
+    }
+
+    public function getCreateDate(): ?\DateTimeInterface
+    {
+        return $this->create_date;
+    }
+
+    public function setCreateDate(?\DateTimeInterface $create_date): self
+    {
+        $this->create_date = $create_date;
+
+        return $this;
+    }
+
+    public function getEditDate(): ?\DateTimeInterface
+    {
+        return $this->edit_date;
+    }
+
+    public function setEditDate(?\DateTimeInterface $edit_date): self
+    {
+        $this->edit_date = $edit_date;
+
+        return $this;
+    }
+
+    public function getListname(): ?string
+    {
+        return $this->Listname;
+    }
+
+    public function setListname(?string $Listname): self
+    {
+        $this->Listname = $Listname;
+
+        return $this;
+    }
+
+    public function getPrivacy(): ?bool
+    {
+        return $this->privacy;
+    }
+
+    public function setPrivacy(?bool $privacy): self
+    {
+        $this->privacy = $privacy;
+
+        return $this;
+    }
+
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): self
+    {
+        $this->users = $users;
 
         return $this;
     }

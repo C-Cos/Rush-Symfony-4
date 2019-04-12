@@ -57,16 +57,15 @@ class Users implements UserInterface
      */
     private $profile_desc;
 
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Lists", mappedBy="userlist")
+     * @ORM\OneToMany(targetEntity="App\Entity\Movie", mappedBy="users")
      */
-    private $Listname;
+    private $author;
 
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
-        $this->Listname = new ArrayCollection();
+        $this->author = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,35 +190,38 @@ class Users implements UserInterface
         return $this;
     }
 
-
     /**
-     * @return Collection|Lists[]
+     * @return Collection|Movie[]
      */
-    public function getListname(): Collection
+    public function getAuthor(): Collection
     {
-        return $this->Listname;
+        return $this->author;
     }
 
-    public function addListname(Lists $listname): self
+    public function addAuthor(Movie $author): self
     {
-        if (!$this->Listname->contains($listname)) {
-            $this->Listname[] = $listname;
-            $listname->setUserlist($this);
+        if (!$this->author->contains($author)) {
+            $this->author[] = $author;
+            $author->setUsers($this);
         }
 
         return $this;
     }
 
-    public function removeListname(Lists $listname): self
+    public function removeAuthor(Movie $author): self
     {
-        if ($this->Listname->contains($listname)) {
-            $this->Listname->removeElement($listname);
+        if ($this->author->contains($author)) {
+            $this->author->removeElement($author);
             // set the owning side to null (unless already changed)
-            if ($listname->getUserlist() === $this) {
-                $listname->setUserlist(null);
+            if ($author->getUsers() === $this) {
+                $author->setUsers(null);
             }
         }
 
         return $this;
     }
+
+
+
+
 }
