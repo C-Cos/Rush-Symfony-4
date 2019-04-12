@@ -27,6 +27,17 @@ class MovieController extends AbstractController
     }
 
     /**
+     * @Route("/list", name="movie_list", methods={"GET"})
+     */
+    public function myList(MovieRepository $movieRepository): Response
+    {
+        dump($this->getUser());
+        return $this->render('movie/index.html.twig', [
+            'movies' => $movieRepository->findByUser($this->getUser()),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="movie_new", methods={"GET","POST"})
      * 
      */

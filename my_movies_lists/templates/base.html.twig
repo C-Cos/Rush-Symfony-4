@@ -31,7 +31,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         {% if is_granted('ROLE_USER') %}
-         <a class="dropdown-item" href="{{ path('movie_index') }}">My Lists</a>
+         <a class="dropdown-item" href="{{ path('movie_list') }}">My Lists</a>
           <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
         {% else %}
           <a class="dropdown-item" href="{{ path('login') }}">Login</a>
