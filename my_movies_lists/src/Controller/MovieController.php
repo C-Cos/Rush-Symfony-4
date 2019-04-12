@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * @Route("/movie")
@@ -26,7 +27,8 @@ class MovieController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="movie_new", defaults={"title" = 0}, methods={"GET","POST"})
+     * @Route("/new{title}", name="movie_new", defaults = {"title" = 0})
+     * @Method("GET")
      */
     public function new($title): Response
     {
@@ -40,7 +42,12 @@ class MovieController extends AbstractController
         $entityManager->persist($movie);
         $entityManager->flush();
 
-        return $this->redirectToRoute('movie_details/index.html.twig');
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Movie added to your list!'
+        );
+
+        return $this->redirectToRoute("home");
 
         /* if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

@@ -20,13 +20,11 @@ class SearchController extends AbstractController
 
         $search = $request->request->get('search');
         $result = $client->getSearchApi()->searchMovies($search);
+        $actor = $client->getSearchApi()->searchPersons($search);
 
-        $repository = new \Tmdb\Repository\MovieRepository($client);
-        $movie      = $repository->load(87421);
+        dump($actor);
 
-        dump($movie);
-
-        return $this->render('search/index.html.twig', ['movies' => $result, 'result' => $search]);
+        return $this->render('search/index.html.twig', ['movies' => $result, 'result' => $search, 'actors' => $actor['results']]);
          
     }
 }

@@ -6,6 +6,12 @@
     <p>Browse your favorite movies !</p>
 </div>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
 <div class = 'container center'>
     <div class = 'row'>
         {% for movie in movies.results|slice(0, 12) %}
