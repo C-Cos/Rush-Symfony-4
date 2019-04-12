@@ -16,9 +16,6 @@ class Lists
      */
     private $id;
 
-
-
-
     /**
      * @ORM\Column(type="text", nullable=true)
      */
@@ -49,6 +46,11 @@ class Lists
      * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="Listname")
      */
     private $userlist;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $list_name;
 
     //public function __construct()
     //{

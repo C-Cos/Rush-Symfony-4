@@ -65,7 +65,6 @@ class Users implements UserInterface
 
     public function __construct()
     {
-        $this->lists = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
         $this->Listname = new ArrayCollection();
     }
@@ -192,36 +191,6 @@ class Users implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Lists[]
-     */
-    public function getLists(): Collection
-    {
-        return $this->lists;
-    }
-
-    public function addList(Lists $list): self
-    {
-        if (!$this->lists->contains($list)) {
-            $this->lists[] = $list;
-            $list->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeList(Lists $list): self
-    {
-        if ($this->lists->contains($list)) {
-            $this->lists->removeElement($list);
-            // set the owning side to null (unless already changed)
-            if ($list->getUser() === $this) {
-                $list->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Lists[]
