@@ -17,7 +17,7 @@ class Lists
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\users", inversedBy="lists")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="lists")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
