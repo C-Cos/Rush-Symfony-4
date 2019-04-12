@@ -35,14 +35,38 @@ class MovieDetailsController extends AbstractController
         $token  = new \Tmdb\ApiToken('2d0f20ce4b63a3992d225fe3751cb1d1');
         $client = new \Tmdb\Client($token);
 
-        $credits = $client->getMoviesApi()->getCredits(87421);
-        dump($credits);
+        $response = $client->getDiscoverApi()->discoverMovies([
+            'page' => 1,
+            'with_people' => $id
+        ]);
         
-        $person = $client->getPeopleApi()->getPerson($id);
+        dump($response);
 
-        dump($person); 
+        return $this->render('movie_details/Actor_movie.html.twig', array('movies' => $response));
+     
+    }
 
-        return $this->render('movie_details/index.html.twig', array('movies' => $movie));
+    /**
+     * @Route("/genre/details{id}", defaults={"id" = 0}, name="genre_details")
+     * @Method("GET")
+     */
+    public function genreDetails($id)
+    {
+        $token  = new \Tmdb\ApiToken('2d0f20ce4b63a3992d225fe3751cb1d1');
+        $client = new \Tmdb\Client($token);
+
+        $genres = $client->getGenresApi()->getGenres();
+
+        dump($genres);
+
+        $response = $client->getDiscoverApi()->discoverMovies([
+            'page' => 1,
+            'with_genres' => $id
+        ]);
+        
+        dump($response);
+
+        return $this->render('movie_details/Actor_movie.html.twig', array('movies' => $response));
      
     }
 

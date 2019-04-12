@@ -23,7 +23,7 @@ class HomeController
     {
         $token  = new \Tmdb\ApiToken('2d0f20ce4b63a3992d225fe3751cb1d1');
         $client = new \Tmdb\Client($token);
-        
+
         $movies = $client->getMoviesApi()->getPopular();
         /* $repository = new \Tmdb\Repository\MovieRepository($client);
         $movies = $repository->getTopRated(array('page' => 1)); */
