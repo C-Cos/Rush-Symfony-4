@@ -57,10 +57,6 @@ class Users implements UserInterface
      */
     private $profile_desc;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Lists", mappedBy="user")
-     */
-    private $lists;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Lists", mappedBy="userlist")
