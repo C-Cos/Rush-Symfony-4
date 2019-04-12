@@ -27,7 +27,23 @@
             
         {% block javascripts %}
         <script>
-        window.addEventListener('load', () => {
+        var clickHandler = function(e){
+                $.ajax({
+                        url:  "{{ path('movie_new') }}",
+                        type: "POST",
+                        async: true,
+                        data: { title : "{{ movies.original_title }}" },
+                                success: function(data){
+                                $('#add_list').one('click', clickHandler, alert("Film Added to your List"));},
+                        error: function(){}
+                        });
+        e.stopImmediatePropagation();
+        return false;
+        }
+
+        $('#add_list').one('click', clickHandler);
+
+        {# window.addEventListener('load', () => {
                 $("#add_list").click(function(){
                         $.ajax({
                                 url: "{{ path('movie_new') }}",
@@ -42,7 +58,7 @@
                                 }
                         });   
                 })
-        });
+        }); #}
         </script>
         {% endblock %}
             

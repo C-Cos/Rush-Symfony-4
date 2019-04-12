@@ -82,11 +82,11 @@ class AppChmodlistLoginAuthenticator extends AbstractFormLoginAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse('lists');
+            return new RedirectResponse('movie');
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse('lists');
+        return new RedirectResponse('movie');
         //throw new \Exception("lists/show.html.twig");
     }
 

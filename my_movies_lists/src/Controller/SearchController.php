@@ -39,19 +39,19 @@ class SearchController extends AbstractController
         $lower = strtolower($search);
         //dump($array);
 
+        ////////////////// find movie by genre id//////////////
         if (array_key_exists($lower , $array)) {
             $var = $array[$lower];
-        }
-        //dump($var);
-
-        ////////////////// find movie by genre id//////////////
-        $genres = $client->getGenresApi()->getGenres();
-        $response = $client->getDiscoverApi()->discoverMovies([
+            $genres = $client->getGenresApi()->getGenres();
+            $response = $client->getDiscoverApi()->discoverMovies([
             'page' => 1,
             'with_genres' => $var
-        ]);
-
-        dump($response);
+            ]);
+            
+        }else{$response = null;}
+        
+        
+        //dump($response);
         
         
         return $this->render('search/index.html.twig', 
