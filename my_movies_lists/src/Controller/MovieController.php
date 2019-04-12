@@ -36,6 +36,10 @@ class MovieController extends AbstractController
         $title = $request->request->get('title');
 
         $movie->setTitleName($title);
+        $movie->setCreateDate(new \DateTime);
+        $movie->setPrivacy(false);
+        $movie->setListname("favori");
+        $movie->setUsers($this->getUser());
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($movie);
         $entityManager->flush();

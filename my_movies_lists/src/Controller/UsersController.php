@@ -46,15 +46,6 @@ class UsersController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $list = new Lists();
-            $list->setUser($this->getUser());
-            $list->setListname('Favoris');
-            $list->setDescription("");
-            $list->setCreateDate(new \DateTime());
-            $list->setEditDate(new \DateTime());
-            $list->setMovie(" a ");
-            $list->setUserlist();
-
 
 
             return $this->redirectToRoute('users_index'); 

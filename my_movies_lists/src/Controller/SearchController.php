@@ -37,12 +37,12 @@ class SearchController extends AbstractController
             $array[strtolower($name)] = $id;
         }
         $lower = strtolower($search);
-        dump($array);
+        //dump($array);
 
         if (array_key_exists($lower , $array)) {
             $var = $array[$lower];
         }
-        dump($var);
+        //dump($var);
 
         ////////////////// find movie by genre id//////////////
         $genres = $client->getGenresApi()->getGenres();
