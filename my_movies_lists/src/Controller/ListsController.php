@@ -34,6 +34,8 @@ class ListsController extends AbstractController
         $form = $this->createForm(ListsType::class, $list);
         $form->handleRequest($request);
         $list->setUser($this->getUser());
+        //$list->setEditDate(new \DateTime());
+        //$list->setMovie();
         //dump($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {

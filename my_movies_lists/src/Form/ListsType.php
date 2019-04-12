@@ -12,12 +12,12 @@ class ListsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('listname')
+            
+            //->add('userlist')
             ->add('description')
             //->add('create_date')
             //->add('edit_date')
             ->add('privacy')
-            //->add('user')
             //->add('movie')
         ;
     }

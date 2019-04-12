@@ -16,7 +16,6 @@ class UsersType extends AbstractType
             ->add('email')
             //->add('roles')
             ->add('password')
-            
             //->add('create_date')
             //->add('modify_date')
             ->add('profile_desc')
